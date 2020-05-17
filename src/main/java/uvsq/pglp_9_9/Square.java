@@ -1,11 +1,11 @@
 package uvsq.pglp_9_9;
 
 public class Square implements Shape {
-	int Id;
+	String Id;
 	Point p1;
 	Point p2;
 	
-	public Square(int Id,Point p1,Point p2)
+	public Square(String Id,Point p1,Point p2)
 	{	
 		this.Id=Id;
 		this.p1=p1;
@@ -55,7 +55,7 @@ public class Square implements Shape {
 	}
 	
 	
-	public int getId()
+	public String getId()
 	{
 		return this.Id;
 	}

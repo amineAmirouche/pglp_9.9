@@ -23,7 +23,7 @@ public class SquareDAO {
 			if (!existTuple(s))
 			{
 			java.sql.PreparedStatement statement=conn.prepareStatement("insert into SQUARE(id,point1,point2) values(?,?,?)");
-			statement.setInt(1, s.getId());
+			statement.setString(1, s.getId());
 			statement.setString(2, s.GetCoordp1());
 			statement.setString(3, s.GetCoordp2());
 			statement.execute();}
@@ -43,7 +43,7 @@ public class SquareDAO {
 			java.sql.PreparedStatement statement=conn.prepareStatement("update SQUARE Set point1=? , point2=? where id=?");
 			statement.setString(1, s.GetCoordp1());
 			statement.setString(2, s.GetCoordp2());
-			statement.setInt(3, s.getId());
+			statement.setString(3, s.getId());
 			statement.execute();
 		} catch (SQLException e) {
 			
@@ -61,7 +61,7 @@ public class SquareDAO {
            java.sql.ResultSet resultSet = statement.executeQuery("select * from SQUARE");
 
            while (resultSet.next()){
-               System.out.println("id: "+resultSet.getInt("id"));
+               System.out.println("id: "+resultSet.getString("id"));
                System.out.println("point1: "+resultSet.getString("point1"));
                System.out.println("point2: "+resultSet.getString("point2"));
            }
@@ -77,10 +77,11 @@ public class SquareDAO {
 		try {
 			Connection conn=DriverManager.getConnection(this.url);
 			java.sql.Statement statement =conn.createStatement();
-			java.sql.ResultSet resultSet = statement.executeQuery("SELECT * FROM SQUARE where id="+s.getId());
+			java.sql.ResultSet resultSet = statement.executeQuery("SELECT * FROM SQUARE where id='"+s.getId()+"'");
 	          
-			if(resultSet.next() &&resultSet.getInt("id")!=0)
+			if(resultSet.next() && resultSet.getString("id")!=null )
 			{
+				System.out.println("lid du carre"+resultSet.getString("id"));
 				return true;
 			}
 			else return false;

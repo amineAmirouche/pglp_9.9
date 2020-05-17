@@ -1,11 +1,13 @@
 package uvsq.pglp_9_9;
 
 public class Circle implements Shape {
+	String id;
 	Point centre;
 	int rayon;
 	
-	public Circle(Point centre,int r)
+	public Circle(String id,Point centre,int r)
 	{
+		this.id=id;
 		this.centre=centre;
 		this.rayon=r;
 		/*this.centre.x=centre.x;
@@ -28,6 +30,23 @@ public class Circle implements Shape {
 	public Point getCentre()
 	{
 		return this.centre;
+	}
+	
+	public int getRayon()
+	{
+		return this.rayon;
+	}
+	
+	public String GetCoordcentre()
+	{
+		
+		String s=this.centre.x+ ";"+this.centre.y;
+		return s;
+	}
+	
+	public String getId()
+	{
+		return this.id;
 	}
 	
 	
