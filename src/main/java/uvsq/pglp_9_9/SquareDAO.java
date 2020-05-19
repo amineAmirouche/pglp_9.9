@@ -80,8 +80,8 @@ public class SquareDAO {
 			java.sql.ResultSet resultSet = statement.executeQuery("SELECT * FROM SQUARE where id='"+s.getId()+"'");
 	          
 			if(resultSet.next() && resultSet.getString("id")!=null )
-			{
-				System.out.println("lid du carre"+resultSet.getString("id"));
+			{	
+				System.out.println("Insertion echoué dans la table Square "+s.getId() + "existe deja dans la bd");
 				return true;
 			}
 			else return false;

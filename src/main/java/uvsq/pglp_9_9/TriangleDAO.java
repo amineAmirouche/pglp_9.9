@@ -80,6 +80,7 @@ private String url;
 	          
 			if(resultSet.next() && resultSet.getString("id")!=null )
 			{
+				System.out.println("Insertion echoué dans la table Triangle "+s.getId() );
 				return true;
 			}
 			else return false;

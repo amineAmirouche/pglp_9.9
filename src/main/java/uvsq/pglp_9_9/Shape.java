@@ -4,5 +4,7 @@ public interface Shape {
 	
 	public void move(Point decalage);
 	public void draw();
+	public String type();
+	public String getId();
 
 }

@@ -3,10 +3,11 @@ package uvsq.pglp_9_9;
 import java.util.ArrayList;
 
 public class CompositeShape implements Shape {
-
+	String id;
 	ArrayList<Shape> listFormes;
-	public CompositeShape()
+	public CompositeShape(String id)
 	{
+		this.id=id;
 		this.listFormes=new ArrayList<Shape>();
 	}
 	
@@ -19,6 +20,7 @@ public class CompositeShape implements Shape {
 	{
 		for (int i=0;i<this.listFormes.size();i++)
 		{
+			System.out.println("je deplace "+ this.listFormes.get(i).getId() + "avec le point" + decalage.getX()+ decalage.getY());
 			this.listFormes.get(i).move(decalage);
 			
 		}
@@ -32,6 +34,23 @@ public class CompositeShape implements Shape {
 			s.draw();
 		}
 	}
+	
+	public String type()
+	{
+		String type="Composite";
+		return type;
+	}
+	
+	public ArrayList<Shape> getList()
+	{
+		return this.listFormes;
+	}
+	
+	public String getId()
+	{
+		return this.id;
+	}
+	
 	
 	//CompositeShape p1;
 	//p1.add(triangle);

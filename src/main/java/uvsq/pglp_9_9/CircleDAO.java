@@ -80,7 +80,7 @@ private String url;
 	          
 			if(resultSet.next() && resultSet.getString("id")!=null )
 			{
-				System.out.println("lid du CERCLE"+resultSet.getString("id"));
+				System.out.println("Insertion echoué dans la table Circle "+s.getId() + "existe deja dans la bd");
 				return true;
 			}
 			else return false;
@@ -93,5 +93,65 @@ private String url;
 		
 	}
 	
+	public Circle getObjet(String id)
+	{
+		System.out.println("l id du debut est"+ id);
+		Point g=new Point(0,0);
+		Circle circle =new Circle("c0",g,0);
+		
+		try {
+			Connection conn=DriverManager.getConnection(this.url);
+			java.sql.Statement statement =conn.createStatement();
+			System.out.println("jai cree la connexion");
+			java.sql.ResultSet resultSet = statement.executeQuery("select * from CIRCLE where id='"+id+"'");
+			System.out.println("jai executer la requete");
+			
+			while (resultSet.next())
+			{
+			System.out.println(" id :"+ resultSet.getString("id"));
+			circle.SetId(resultSet.getString("id"));
+			String[] arrOfStr=splitt(resultSet.getString("centre"));
+			System.out.println("result du splitt "+ arrOfStr[0]+ " l'autre "+ arrOfStr[1]);
+			circle.SetCentre(Float.parseFloat(arrOfStr[0]), Float.parseFloat(arrOfStr[1]));
+			circle.SetRayon(resultSet.getInt("rayon"));}
+			return circle; 
+			
+		} catch (SQLException e) {
+			return circle;
+			//e.printStackTrace();
+		}
+		
+		
+	}
+	
+	public String[] splitt(String s)
+	{
+		 String[] arrOfStr = s.split(";", 2); 
+		 return arrOfStr;
+		
+	}
+	
+	
+	public boolean existTuple1(String s)
+	{
+		try {
+			Connection conn=DriverManager.getConnection(this.url);
+			java.sql.Statement statement =conn.createStatement();
+			java.sql.ResultSet resultSet = statement.executeQuery("SELECT * FROM CIRCLE where id='"+s+"'");
+	          
+			if(resultSet.next() && resultSet.getString("id")!=null )
+			{
+				//System.out.println("Insertion echoué dans la table Circle "+s+ "existe deja dans la bd");
+				return true;
+			}
+			else return false;
+	        
+		} catch (SQLException e) {
+			//return false;
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
 
 }

@@ -1,9 +1,9 @@
 package uvsq.pglp_9_9;
 
 public class Circle implements Shape {
-	String id;
-	Point centre;
-	int rayon;
+	private String id;
+	private Point centre;
+	private int rayon;
 	
 	public Circle(String id,Point centre,int r)
 	{
@@ -17,8 +17,12 @@ public class Circle implements Shape {
 
 	public void move(Point decalage)
 	{
-		this.centre.x+=decalage.x;
-		this.centre.y+=decalage.y;
+		this.centre.SetX(this.centre.getX()+decalage.getX());
+		this.centre.SetY(this.centre.getY()+decalage.getY());
+		
+	/*	this.centre.x+=decalage.x;
+		this.centre.y+=decalage.y;*/
+		System.out.println("cercle  :" + this.GetCoordcentre());
 	}
 	
 	public void draw()
@@ -39,14 +43,37 @@ public class Circle implements Shape {
 	
 	public String GetCoordcentre()
 	{
-		
-		String s=this.centre.x+ ";"+this.centre.y;
+		String s=this.centre.getX()+";"+this.centre.getY();
+		//String s=this.centre.x+ ";"+this.centre.y;
 		return s;
 	}
 	
 	public String getId()
 	{
 		return this.id;
+	}
+	
+	public String type()
+	{
+		String type="Circle";
+		return type;
+	}
+	
+	public void SetId(String s)
+	{
+		this.id=s;
+	}
+	
+	
+	public void SetCentre(float x,float y)
+	{
+		this.centre.SetX(x);
+		this.centre.SetY(y);
+	}
+	
+	public void SetRayon(int r)
+	{
+		this.rayon=r;
 	}
 	
 	

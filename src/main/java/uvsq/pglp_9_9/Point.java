@@ -2,8 +2,8 @@ package uvsq.pglp_9_9;
 
 public class Point {
 	
-	public float x;
-	public float y;
+	private float x;
+	private float y;
 	
 	public Point (float x,float y)
 	{
@@ -30,12 +30,12 @@ public class Point {
 	
 	public void SetX(float x)
 	{
-		this.x+=x;
+		this.x=x;
 	}
 	
 	public void SetY(float y)
 	{
-		this.y+=y;
+		this.y=y;
 	}
 	
 }
