@@ -35,15 +35,21 @@ public class App
               e.printStackTrace();
           }*/
     	
-    	
+    	String url="jdbc:derby:Bdpglp";
+    	CircleDAO circledao=new CircleDAO(url);
+    	circledao.AfficheCercles();
     	Scanner in=new Scanner(System.in);
     	DrawingTUI t=new DrawingTUI(in);
     	Command cf=t.NextCommand();
     	cf.execute();
+    	CompositeShapeDAO cm=new CompositeShapeDAO(url);
+    	cm.AfficheComposite();
+    	/*cf.execute();
     	String url="jdbc:derby:Bdpglp";
     	CircleDAO circle=new CircleDAO(url);
-    	circle.AfficheCercles();
+    	circle.AfficheCercles();*/
     	
+    	//composite(circle:c1,triangle:t2,square:s)
     	
     	/*String url="jdbc:derby:Bdpglp";
     	 Point p1=new Point(1,2);

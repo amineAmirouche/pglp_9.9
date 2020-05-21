@@ -12,9 +12,10 @@ public class DrawingTUI {
 	public DrawingTUI(Scanner i)
 	{
 		this.in=i;
-		tab=new String[2];
+		tab=new String[3];
 		tab[0]="[A-Z|a-z]+[1-9]*=Circle\\(\\(\\d+,\\d+\\),\\d+\\)";
-		tab[1]="move\\([a-z|A-Z]+[1-9]*,\\(\\d+,\\d+\\)\\)";
+		tab[1]="moveCircle\\([a-z|A-Z]+[1-9]*,\\(\\d+,\\d+\\)\\)";
+		tab[2]="dessin\\d+\\(([a-z|A-Z]+[0-9]+\\,)+[a-z|A-Z]+[0-9]+;(Circle,|Triangle,|Square,)+(Circle\\)|Triangle\\)|Square\\))";
 	}
 	
 	
@@ -55,9 +56,21 @@ public class DrawingTUI {
 		}
 		else if (situation==3)
 		{
-			throw new ErrorSyntaxeException("Erreur de syntaxe");
+			System.out.println("le composite");
+			//AfficheElements(SplitFirstCompositeElem(f));
+			//SplitFirstCompositeElem(f);
+			System.out.println("le second element");
+			//AfficheElements(SplitSecondCompositeElem(f));
+			Command cd=new CreateCompositeCommand(IdCompositeElem(f),SplitSecondCompositeElem(f),SplitFirstCompositeElem(f));
+			return cd;
+		}
+		
+		else if (situation==4)
+		{
+			throw new ErrorSyntaxeException("erreur de Syntaxe");
 			
 		}
+		
 		return cf;
 		}
 	
@@ -78,6 +91,39 @@ public String[] parsingMove(String s)
 
 }
 
+public String[] SplitFirstCompositeElem(String s)
+{
+	
+	 String[] arrOfStr = s.split(";"); 
+	 //AfficheElements(arrOfStr);
+	 String [] arrOfStr2=arrOfStr[0].split("\\(");
+	 //AfficheElements(arrOfStr2);
+	 //AfficheElements(arrOfStr);
+	 return (arrOfStr2[1].split(","));
+
+}
+
+public String IdCompositeElem(String s)
+{
+	
+	 String[] arrOfStr = s.split(";"); 
+	 //AfficheElements(arrOfStr);
+	 String [] arrOfStr2=arrOfStr[0].split("\\(");
+	 //AfficheElements(arrOfStr2);
+	 //AfficheElements(arrOfStr);
+	 return (arrOfStr2[0]);
+
+}
+
+public String[] SplitSecondCompositeElem(String s)
+{
+	
+	 String[] arrOfStr = s.split(";");  
+	 String[] arrOfStr2=arrOfStr[1].split("\\)");
+	 return (arrOfStr2[0].split(","));
+
+}
+
 public int checkSituation(String s)
 {
 	Pattern[] pattern=new Pattern[this.tab.length];
@@ -87,7 +133,7 @@ public int checkSituation(String s)
 		Matcher matcher=pattern[i].matcher(s);
 		if (matcher.matches()==true) {return i+1;};
 	}
-	return 3;
+	return 4;
 }
 
 

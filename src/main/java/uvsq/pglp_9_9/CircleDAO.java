@@ -60,8 +60,8 @@ private String url;
 
            while (resultSet.next()){
                System.out.println("id: "+resultSet.getString("id"));
-               System.out.println("point1: "+resultSet.getString("centre"));
-               System.out.println("point2: "+resultSet.getInt("rayon"));
+               System.out.println("centre: "+resultSet.getString("centre"));
+               System.out.println("rayon: "+resultSet.getInt("rayon"));
                
            }
 			
