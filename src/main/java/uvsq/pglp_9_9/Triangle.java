@@ -16,22 +16,12 @@ public class Triangle implements Shape {
 	
 	public void move(Point decalage)
 	{
-		System.out.println(" point 1 du traingle "+ this.GetCoordp1());
-		/*this.p1.x+=decalage.x;
-		this.p1.y+=decalage.y;
-		this.p2.x+=decalage.x;
-		this.p2.y+=decalage.y;
-		this.p3.x+=decalage.x;
-		this.p3.y+=decalage.y;*/
-		
 		this.p1.SetX(this.p1.getX()+decalage.getX());
 		this.p1.SetY(this.p1.getY()+decalage.getY());
 		this.p2.SetX(this.p2.getX()+decalage.getX());
 		this.p2.SetY(this.p2.getY()+decalage.getY());
 		this.p3.SetX(this.p3.getX()+decalage.getX());
 		this.p3.SetY(this.p3.getY()+decalage.getY());
-		System.out.println("triangle : "   + this.GetCoordp1() +this.GetCoordp2() + this.GetCoordp3()+ "decalage : " + decalage.getX() + decalage.getY());
-
 	}
 	
 	public void draw()
@@ -72,6 +62,30 @@ public class Triangle implements Shape {
 	{
 		String type="Triangle";
 		return type;
+	}
+	
+
+	public void Setp1(float x,float y)
+	{
+		this.p1.SetX(x);
+		this.p1.SetY(y);
+	}
+	
+	public void Setp2(float x,float y)
+	{
+		this.p2.SetX(x);
+		this.p2.SetY(y);
+	}
+	
+	public void Setp3(float x,float y)
+	{
+		this.p3.SetX(x);
+		this.p3.SetY(y);
+	}
+	
+	public void SetId(String s)
+	{
+		this.id=s;
 	}
 	
 }

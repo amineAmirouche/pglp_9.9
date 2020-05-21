@@ -34,87 +34,45 @@ public class App
           } catch (SQLException e) {
               e.printStackTrace();
           }*/
-    	
-    	String url="jdbc:derby:Bdpglp";
-    	CircleDAO circledao=new CircleDAO(url);
-    	circledao.AfficheCercles();
-    	Scanner in=new Scanner(System.in);
-    	DrawingTUI t=new DrawingTUI(in);
-    	Command cf=t.NextCommand();
-    	cf.execute();
-    	CompositeShapeDAO cm=new CompositeShapeDAO(url);
-    	cm.AfficheComposite();
-    	/*cf.execute();
-    	String url="jdbc:derby:Bdpglp";
-    	CircleDAO circle=new CircleDAO(url);
-    	circle.AfficheCercles();*/
-    	
-    	//composite(circle:c1,triangle:t2,square:s)
-    	
-    	/*String url="jdbc:derby:Bdpglp";
-    	 Point p1=new Point(1,2);
-         Point p2=new Point (3,4);
-         Point p3=new Point (5,6);
-         CircleDAO circledao=new CircleDAO(url);
-        
-         Command cf= new CreateCircleCommand("Cercle40",p1,10);
-         cf.execute();
-         circledao.AfficheCercles();
+    	//String url="jdbc:derby:Bdpglp";
+    	/*CompositeShape test15=new CompositeShape("test15");
+    	 Point p1=new Point(0,0);
+         Point p2=new Point (1,1);
+         Point centre=new Point (0,0);
+         Point dec=new Point (20,20);
+         Point centre1=new Point (10,0);
+         Square c1=new Square("carre15",p1,p2);
+         Circle circle1=new Circle("circle15",centre,30);
+         Circle circle2=new Circle ("circle15",centre1,50);
+         test15.add(c1);
+         test15.add(circle1);
+         test15.add(circle2);
          
-        Command cf1=new MoveCircleCommand("Cercle40",p2);
-        
-    	cf1.execute();
-    	System.out.println(" apres le mouv ....");
-        System.out.println(" .....................");
+         CompositeShapeDAO csd=new CompositeShapeDAO(url);
+         csd.saveComposite(test15);
+     
+          test15.move(dec);
+         csd.updateComposite(test15);*/
+        /*CircleDAO circledao=new CircleDAO(url);
         circledao.AfficheCercles();*/
-    	/*String url="jdbc:derby:Bdpglp";
-    	 Point p1=new Point(1,2);
-         Point p2=new Point (3,4);
-         Point p3=new Point (5,6);
-        Point p4=new Point (7,2);
-         Point p5=new Point (4,2);
-         Point p6=new Point (4,1);
-         Point p7=new Point (4,1);
-         Point decalage=new Point (2,2);
-         String cc1="carre1";
-         Square carre=new Square(cc1,p1,p2);
-        
-         Triangle triangle=new Triangle("triangle1",p3,p4,p5);
-        
-        Circle cercle2=new Circle("cercle2",p7,50);
-         Circle cercle=new Circle("cercle1",p6,50);
-         
-         CompositeShape compose=new CompositeShape("Composite1");
-         compose.add(cercle);
-         compose.add(triangle);
-         compose.add(carre);
-         
-         CompositeShape compose2=new CompositeShape("composite2");
-         compose2.add(cercle2);
-         
-         compose.add(compose2);*/
-         
-         //compose.draw();
-        /* compose.draw();
-         System.out.println("je deplace le composite ... ");
-         compose.move(decalage);
-         compose.draw();*/
-         //CompositeShapeDAO compositeDAO=new CompositeShapeDAO(url);
-        //compositeDAO.saveComposite(compose);
-         //compositeDAO.removeComposite(compose);
-         
-         //compositeDAO.AfficheComposite();
-        
-        //carre.AfficheSquares();
-       // carre.AfficheSquares();
-       // c1.move(decalage);*/
-        
     	
+    String url="jdbc:derby:Bdpglp";
+ 
+    	Scanner sc = new Scanner(System.in);
     	
-    	/* String url="jdbc:derby:MaBd;create=true";
+    	DrawingTUI t=new DrawingTUI(sc);
+    	while (true)
+    	{
+    	Command cf=t.NextCommand();
+    	cf.execute();}
+    	/*SquareDAO squaredao=new SquareDAO(url);
+    	squaredao.AfficheSquares();*/
+    //TriangleDAO triangledao=new TriangleDAO(url);
+    //triangledao.AfficheTriangles();
+   
+    
         
-        
-        try {
+    /*    try {
             Connection con = DriverManager.getConnection(url);
             java.sql.Statement statement =con.createStatement();
 

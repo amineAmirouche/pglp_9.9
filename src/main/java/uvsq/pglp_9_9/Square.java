@@ -23,7 +23,7 @@ public class Square implements Shape {
 		this.p1.SetY(this.p1.getY()+decalage.getY());
 		this.p2.SetX(this.p2.getX()+decalage.getX());
 		this.p2.SetY(this.p2.getY()+decalage.getY());
-		System.out.println("SQuare  :" + this.GetCoordp1() +this.GetCoordp2() + "decalage : " + decalage.getX() + decalage.getY());
+		//System.out.println("SQuare  :" + this.GetCoordp1() +this.GetCoordp2() + "decalage : " + decalage.getX() + decalage.getY());
 	}
 	
 	public void draw()
@@ -70,6 +70,27 @@ public class Square implements Shape {
 		String type="Square";
 		return type;
 	}
+	
+	
+	public void Setp1(float x,float y)
+	{
+		this.p1.SetX(x);
+		this.p1.SetY(y);
+	}
+	
+	public void Setp2(float x,float y)
+	{
+		this.p2.SetX(x);
+		this.p2.SetY(y);
+	}
+	
+	
+	
+	public void SetId(String s)
+	{
+		this.Id=s;
+	}
+	
 	
 	
 }

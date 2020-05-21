@@ -12,7 +12,7 @@ public class CompositeShapeDAO {
 		this.url=url;
 	}
 	
-	public void saveComposite(CompositeShape s)
+	public void saveComposite(CompositeShape s) throws TupleExistException
 	{
 		try {
 			Connection conn=DriverManager.getConnection(this.url);
@@ -63,20 +63,55 @@ public class CompositeShapeDAO {
 		
 	}
 	
-	public void updateComposite(Triangle s)
+	public void updateComposite(CompositeShape s)
 	{
 		try {
 			Connection conn=DriverManager.getConnection(this.url);
-			java.sql.PreparedStatement statement=conn.prepareStatement("update TRIANGLE Set point1=? , point2=?,point3=? where id=?");
-			statement.setString(1, s.GetCoordp1());
-			statement.setString(2, s.GetCoordp2());
-			statement.setString(3, s.GetCoordp3());
-			statement.setString(4, s.getId());
-			statement.execute();
+			ArrayList<Shape> list=s.getList();
+			for (int i=0;i<list.size();i++)
+			{
+				if (list.get(i).type()=="Triangle")
+				{
+					TriangleDAO triangle=new TriangleDAO(this.url);
+					triangle.updateTriangle(( Triangle) list.get(i));
+				}
+				
+				if (list.get(i).type()=="Square")
+				{
+					SquareDAO square=new SquareDAO(this.url);
+					square.updateSquare((Square) list.get(i));
+				}
+				
+				if (list.get(i).type()=="Circle")
+				{
+					CircleDAO circle=new CircleDAO(this.url);
+					circle.updateCircle((Circle) list.get(i));
+					
+				}
+				
+				if (list.get(i).type()=="Composite")
+				{
+					updateComposite((CompositeShape) list.get(i));
+					
+				}
+				
+				if (!existTuple(list.get(i),s))
+				{
+				java.sql.PreparedStatement statement=conn.prepareStatement("update COMPOSITE Set type=? , reference=? where id=?");
+				//System.out.println("type:"+list.get(i).type() + "reference : "+ list.get(i).getId() + "id : "+ s.getId());
+				statement.setString(1, list.get(i).type());
+				statement.setString(2, list.get(i).getId());
+				statement.setString(3, s.getId());
+				statement.execute();}
+				continue;
+				
+			}
+ 			
 		} catch (SQLException e) {
-			
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
 	
 	

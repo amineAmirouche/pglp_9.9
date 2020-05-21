@@ -20,7 +20,7 @@ public class CompositeShape implements Shape {
 	{
 		for (int i=0;i<this.listFormes.size();i++)
 		{
-			System.out.println("je deplace "+ this.listFormes.get(i).getId() + "avec le point" + decalage.getX()+ decalage.getY());
+			//System.out.println("je deplace "+ this.listFormes.get(i).getId() + "avec le point" + decalage.getX()+ decalage.getY());
 			this.listFormes.get(i).move(decalage);
 			
 		}

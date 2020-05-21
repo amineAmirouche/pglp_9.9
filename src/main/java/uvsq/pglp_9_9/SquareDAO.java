@@ -16,7 +16,7 @@ public class SquareDAO {
 		this.url=url;
 	}
 	
-	public void saveSquare(Square s)
+	public void saveSquare(Square s) throws TupleExistException
 	{
 		try {
 			Connection conn=DriverManager.getConnection(this.url);
@@ -26,8 +26,10 @@ public class SquareDAO {
 			statement.setString(1, s.getId());
 			statement.setString(2, s.GetCoordp1());
 			statement.setString(3, s.GetCoordp2());
-			statement.execute();}
-			return;
+			statement.execute();
+			System.out.println(s.getId()+ " a bien été sauvegardé dans la base de donne pglp table Square");
+			}
+			else throw new TupleExistException("Vous essayez d'inserer un tuple deja existant");
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -72,6 +74,28 @@ public class SquareDAO {
 		}
 	}
 	
+	public void AfficheThisSquare(Square s)
+	{
+		
+		try {
+			Connection conn=DriverManager.getConnection(this.url);
+			java.sql.Statement statement =conn.createStatement();
+           java.sql.ResultSet resultSet = statement.executeQuery("select * from SQUARE where id='"+s.getId()+"'");
+
+           while (resultSet.next()){
+        	   System.out.println("affichage du tuple depuis la BD Square");
+               System.out.println("id: "+resultSet.getString("id"));
+               System.out.println("point1: "+resultSet.getString("point1"));
+               System.out.println("point2: "+resultSet.getString("point2"));
+           }
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
 	public boolean existTuple(Square s)
 	{
 		try {
@@ -81,7 +105,7 @@ public class SquareDAO {
 	          
 			if(resultSet.next() && resultSet.getString("id")!=null )
 			{	
-				System.out.println("Insertion echoué dans la table Square "+s.getId() + "existe deja dans la bd");
+				//System.out.println("Insertion echoué dans la table Square "+s.getId() + "existe deja dans la bd");
 				return true;
 			}
 			else return false;
@@ -93,6 +117,61 @@ public class SquareDAO {
 		}
 		
 	}
+	
+	
+	public boolean existTuple1(String s)
+	{
+		try {
+			Connection conn=DriverManager.getConnection(this.url);
+			java.sql.Statement statement =conn.createStatement();
+			java.sql.ResultSet resultSet = statement.executeQuery("SELECT * FROM SQUARE where id='"+s+"'");
+	          
+			if(resultSet.next() && resultSet.getString("id")!=null )
+			{
+				return true;
+			}
+			else return false;
+	        
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
+	
+	public Square getObjet(String id)
+	{
+		Point g=new Point(0,0);
+		Point f=new Point(0,0);
+		
+		Square square=new Square("c0",g,f);
+		try {
+			Connection conn=DriverManager.getConnection(this.url);
+			java.sql.Statement statement =conn.createStatement();
+			java.sql.ResultSet resultSet = statement.executeQuery("select * from SQUARE where id='"+id+"'");
+		while (resultSet.next())
+			{
+			square.SetId(resultSet.getString("id"));
+			String[] arrOfStr1=splitt(resultSet.getString("point1"));
+			String[] arrOfStr2=splitt(resultSet.getString("point2"));
+			square.Setp1(Float.parseFloat(arrOfStr1[0]), Float.parseFloat(arrOfStr1[1]));
+			square.Setp2(Float.parseFloat(arrOfStr2[0]), Float.parseFloat(arrOfStr2[1]));
+			}
+			return square; 
+			
+		} catch (SQLException e) {
+			return square;
+			}
+		
+	}
+	
+	public String[] splitt(String s)
+	{
+		 String[] arrOfStr = s.split(";", 2); 
+		 return arrOfStr;
+		
+	}
+	
 	
 	
 }

@@ -19,7 +19,8 @@ public class CreateCompositeCommand implements Command {
 	
 	@Override
 	public void execute() throws Exception {
-		String url="jdbc:derby:Bdpglp";
+		String url="jdbc:derby:Bdpglp;shutdown=true";
+		//String url="jdbc:derby:Bdpglp";
 		fillMyElements();
 		CompositeShape compositeshape=new CompositeShape(this.id);
 		CompositeShapeDAO compositeshapedao=new CompositeShapeDAO(url);

@@ -62,7 +62,7 @@ private String url;
                System.out.println("id: "+resultSet.getString("id"));
                System.out.println("point1: "+resultSet.getString("point1"));
                System.out.println("point2: "+resultSet.getString("point2"));
-               System.out.println("point2: "+resultSet.getString("point3"));
+               System.out.println("point3: "+resultSet.getString("point3"));
            }
 			
 		} catch (SQLException e) {
@@ -80,7 +80,7 @@ private String url;
 	          
 			if(resultSet.next() && resultSet.getString("id")!=null )
 			{
-				System.out.println("Insertion echoué dans la table Triangle "+s.getId() );
+			
 				return true;
 			}
 			else return false;
@@ -92,6 +92,64 @@ private String url;
 		}
 		
 	}
+	
+	public Triangle getObjet(String id)
+	{
+		Point g=new Point(0,0);
+		Point f=new Point(0,0);
+		Point d=new Point(0,0);
+		Triangle triangle =new Triangle("t0",d,g,f);
+		try {
+			Connection conn=DriverManager.getConnection(this.url);
+			java.sql.Statement statement =conn.createStatement();
+			java.sql.ResultSet resultSet = statement.executeQuery("select * from TRIANGLE where id='"+id+"'");
+		while (resultSet.next())
+			{
+			triangle.SetId(resultSet.getString("id"));
+			String[] arrOfStr1=splitt(resultSet.getString("point1"));
+			String[] arrOfStr2=splitt(resultSet.getString("point2"));
+			String[] arrOfStr3=splitt(resultSet.getString("point3"));
+			triangle.Setp1(Float.parseFloat(arrOfStr1[0]), Float.parseFloat(arrOfStr1[1]));
+			triangle.Setp2(Float.parseFloat(arrOfStr2[0]), Float.parseFloat(arrOfStr2[1]));
+			triangle.Setp3(Float.parseFloat(arrOfStr3[0]), Float.parseFloat(arrOfStr3[1]));}
+			return triangle; 
+			
+		} catch (SQLException e) {
+			return triangle;
+			}
+		
+	}
+	
+	public String[] splitt(String s)
+	{
+		 String[] arrOfStr = s.split(";", 2); 
+		 return arrOfStr;
+		
+	}
+	
+	
+
+	public boolean existTuple1(String s)
+	{
+		try {
+			Connection conn=DriverManager.getConnection(this.url);
+			java.sql.Statement statement =conn.createStatement();
+			java.sql.ResultSet resultSet = statement.executeQuery("SELECT * FROM TRIANGLE where id='"+s+"'");
+	          
+			if(resultSet.next() && resultSet.getString("id")!=null )
+			{
+				return true;
+			}
+			else return false;
+	        
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
+	
+	
 	
 
 }

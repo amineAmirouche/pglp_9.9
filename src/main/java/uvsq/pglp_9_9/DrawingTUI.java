@@ -12,10 +12,15 @@ public class DrawingTUI {
 	public DrawingTUI(Scanner i)
 	{
 		this.in=i;
-		tab=new String[3];
+		tab=new String[7];
 		tab[0]="[A-Z|a-z]+[1-9]*=Circle\\(\\(\\d+,\\d+\\),\\d+\\)";
 		tab[1]="moveCircle\\([a-z|A-Z]+[1-9]*,\\(\\d+,\\d+\\)\\)";
 		tab[2]="dessin\\d+\\(([a-z|A-Z]+[0-9]+\\,)+[a-z|A-Z]+[0-9]+;(Circle,|Triangle,|Square,)+(Circle\\)|Triangle\\)|Square\\))";
+		tab[3]="[a-z|A-Z]+\\d+=Triangle\\(\\d+,\\d+;\\d+,\\d+;\\d+,\\d+\\)";
+		tab[4]="moveTriangle\\([a-z|A-Z]+[1-9]*,\\(\\d+,\\d+\\)\\)";
+		tab[5]="[a-z|A-Z]+\\d+=Square\\(\\d+,\\d+;\\d+,\\d+\\)";
+		tab[6]="moveSquare\\([a-z|A-Z]+[1-9]*,\\(\\d+,\\d+\\)\\)";
+		
 	}
 	
 	
@@ -67,10 +72,44 @@ public class DrawingTUI {
 		
 		else if (situation==4)
 		{
-			throw new ErrorSyntaxeException("erreur de Syntaxe");
+			//throw new ErrorSyntaxeException("erreur de Syntaxe");
+			System.out.print("je suis le triangle");
+			//AfficheElements(parsingTriangle(f));
+			String[] myElems=parsingTriangleSquare(f);
+			Point p1=ConstructPoint1(myElems[0]);
+			Point p2=ConstructPoint1(myElems[1]);
+			Point p3=ConstructPoint1(myElems[2]);
+			Command cd=new CreateTriangleCommand(idTriangleSquare(f),p1,p2,p3);
+			return cd;
+		}
+		
+		else if (situation==5)
+		{
+			System.out.println("move du Triangle..");
+			String[] elements=new String[parsingMove(f).length];
+			elements=parsingMove(f);
+			Command cd=new MoveTriangleCommand(elements[1],constructPoint(elements[3],elements[4]));
+			return cd;
 			
 		}
 		
+		else if (situation==6)
+		{
+			System.out.println("je suis le carré");
+			String[] myElems=parsingTriangleSquare(f);
+			Point p1=ConstructPoint1(myElems[0]);
+			Point p2=ConstructPoint1(myElems[1]);
+			Command cd=new CreateSquareCommand(idTriangleSquare(f),p1,p2);
+			return cd;
+			
+		}
+		else if (situation==7)
+		{
+			String[] elements=new String[parsingMove(f).length];
+			elements=parsingMove(f);
+			Command cd=new MoveSquareCommand(elements[1],constructPoint(elements[3],elements[4]));
+			return cd;
+		}	
 		return cf;
 		}
 	
@@ -81,6 +120,23 @@ public String[] parsingCircle(String s)
 	 String[] arrOfStr = s.split("[=(),]");  
 	 return arrOfStr; 
 
+}
+
+public String idTriangleSquare(String s)
+{
+	
+	 String[] arrOfStr = s.split("=");  
+	 return arrOfStr[0]; 
+
+}
+
+
+
+public String[] parsingTriangleSquare(String s)
+{
+	String[] arrOfStr=s.split("\\(");
+	String f=arrOfStr[1].replace(")", "");
+	return (f.split(";"));
 }
 
 public String[] parsingMove(String s)
@@ -133,7 +189,7 @@ public int checkSituation(String s)
 		Matcher matcher=pattern[i].matcher(s);
 		if (matcher.matches()==true) {return i+1;};
 	}
-	return 4;
+	return this.tab.length+1;
 }
 
 
@@ -160,6 +216,16 @@ public Point constructPoint(String first,String second)
 {
 	float x=Float.parseFloat(first);
 	float y=Float.parseFloat(second);
+	Point point=new Point(x,y);
+	return point;
+}
+
+
+public Point ConstructPoint1(String f)
+{
+	String[] arrOfStr=f.split(",");
+	float x=Float.parseFloat(arrOfStr[0]);
+	float y=Float.parseFloat(arrOfStr[1]);
 	Point point=new Point(x,y);
 	return point;
 }
