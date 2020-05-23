@@ -1,4 +1,9 @@
-package uvsq.pglp_9_9;
+package uvsq.pglp_9_9.command;
+
+import uvsq.pglp_9_9.Point;
+import uvsq.pglp_9_9.Triangle;
+import uvsq.pglp_9_9.TriangleDAO;
+import uvsq.pglp_9_9.TupleNotExistException;
 
 public class MoveTriangleCommand implements Command {
 	String id;

@@ -49,6 +49,79 @@ private String url;
 		}
 	}
 	
+	public void AfficheThisTriangle(Triangle s)
+	{
+		
+		try {
+			Connection conn=DriverManager.getConnection(this.url);
+			java.sql.Statement statement =conn.createStatement();
+           java.sql.ResultSet resultSet = statement.executeQuery("select * from TRIANGLE where id='"+s.getId()+"'");
+
+           while (resultSet.next()){
+        	   System.out.println("affichage du tuple depuis la BD Triangle");
+               System.out.println("id: "+resultSet.getString("id"));
+               System.out.println("point1: "+resultSet.getString("point1"));
+               System.out.println("point2: "+resultSet.getString("point2"));
+               System.out.println("point3: "+resultSet.getString("point3"));
+               
+           }
+           resultSet.close();
+           statement.close();
+           conn.close();
+           //conn=DriverManager.getConnection("jdbc:derby:;shutdown=true");
+           //conn=DriverManager.getConnection("jdbc:derby:Bdpglp;shutdown=true");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	public void AfficheThisTriangle1(String s)
+	{
+		
+		try {
+			Connection conn=DriverManager.getConnection(this.url);
+			java.sql.Statement statement =conn.createStatement();
+           java.sql.ResultSet resultSet = statement.executeQuery("select * from TRIANGLE where id='"+s+"'");
+
+           while (resultSet.next()){
+        	   System.out.println("affichage du tuple depuis la BD Triangle");
+               System.out.println("id: "+resultSet.getString("id"));
+               System.out.println("point1: "+resultSet.getString("point1"));
+               System.out.println("point2: "+resultSet.getString("point2"));
+               System.out.println("point3: "+resultSet.getString("point3"));
+               
+           }
+           resultSet.close();
+           statement.close();
+           conn.close();
+           //conn=DriverManager.getConnection("jdbc:derby:;shutdown=true");
+           //conn=DriverManager.getConnection("jdbc:derby:Bdpglp;shutdown=true");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public void RenitialiseTable() 
+	{
+		try {
+			Connection conn=DriverManager.getConnection(this.url);
+			java.sql.PreparedStatement statement=conn.prepareStatement("delete from TRIANGLE");
+			statement.execute();
+			statement.close();
+			conn.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
 	
 	public void AfficheTriangles()
 	{

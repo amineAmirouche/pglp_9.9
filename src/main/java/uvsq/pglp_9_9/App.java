@@ -6,6 +6,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import uvsq.pglp_9_9.command.Command;
+
 /**
  * Hello world!
  *
@@ -14,13 +16,14 @@ public class App
 {
     public static void main( String[] args ) throws Exception
     {
-    	/* String url="jdbc:derby:Bdpglp:create=true";
+    	//String url="jdbc:derby:Bdpglp:create=true";
+    	/*String url="jdbc:derby://localhost:3030/testDB;create=true";
     	  try {
               Connection con = DriverManager.getConnection(url);
               java.sql.Statement statement =con.createStatement();
 				statement.execute("CREATE TABLE COMPOSITE (type VARCHAR(10),reference VARCHAR(10), id VARCHAR(10))");
-              //statement.execute("CREATE TABLE TRIANGLE ( id VARCHAR(10), point1 VARCHAR(10),point2 VARCHAR(10),point3 VARCHAR(10))");
-             // statement.execute("CREATE TABLE CIRCLE ( id VARCHAR(10), centre VARCHAR(10),rayon INT)");
+              statement.execute("CREATE TABLE TRIANGLE ( id VARCHAR(10), point1 VARCHAR(10),point2 VARCHAR(10),point3 VARCHAR(10))");
+              statement.execute("CREATE TABLE CIRCLE ( id VARCHAR(10), centre VARCHAR(10),rayon INT)");
              //statement.execute("insert into SQUARE(point1,point2) values ('3;7' , '4;8')");
              ResultSet resultSet = statement.executeQuery("select * from SQUARE");
 
@@ -56,11 +59,30 @@ public class App
         /*CircleDAO circledao=new CircleDAO(url);
         circledao.AfficheCercles();*/
     	
-    String url="jdbc:derby:Bdpglp";
+   String url="jdbc:derby:Bdpglp";
+   
  
     	Scanner sc = new Scanner(System.in);
-    	
+    	//Connection conn=DriverManager.getConnection(url);
     	DrawingTUI t=new DrawingTUI(sc);
+   /*CompositeShapeDAO csd=new CompositeShapeDAO(url);
+   csd.RenitialiseTable();*/
+ /* SquareDAO csd=new SquareDAO(url);
+ 
+    	csd.RenitialiseTable();
+    
+    	CircleDAO csd1=new CircleDAO(url);
+    	csd1.RenitialiseTable();
+    	
+    	TriangleDAO csd2=new TriangleDAO(url);
+    	csd2.RenitialiseTable();
+    	//csd.AfficheComposite();*/
+    	/*CircleDAO circledao=new CircleDAO(url);
+    	circledao.AfficheCercles();
+    	SquareDAO squaredao=new SquareDAO(url);
+    	squaredao.AfficheSquares();
+    	TriangleDAO triangledao=new TriangleDAO(url);
+    	triangledao.AfficheTriangles();*/
     	while (true)
     	{
     	Command cf=t.NextCommand();

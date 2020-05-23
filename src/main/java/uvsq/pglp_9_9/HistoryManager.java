@@ -2,6 +2,8 @@ package uvsq.pglp_9_9;
 
 import java.util.HashMap;
 
+import uvsq.pglp_9_9.command.Command;
+
 public class HistoryManager {
 	
 	private final HashMap<String, Command> commandMap = new HashMap<>();

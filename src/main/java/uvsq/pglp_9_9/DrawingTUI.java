@@ -4,6 +4,16 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import uvsq.pglp_9_9.command.Command;
+import uvsq.pglp_9_9.command.CreateCircleCommand;
+import uvsq.pglp_9_9.command.CreateCompositeCommand;
+import uvsq.pglp_9_9.command.CreateSquareCommand;
+import uvsq.pglp_9_9.command.CreateTriangleCommand;
+import uvsq.pglp_9_9.command.MoveCircleCommand;
+import uvsq.pglp_9_9.command.MoveCompositeCommand;
+import uvsq.pglp_9_9.command.MoveSquareCommand;
+import uvsq.pglp_9_9.command.MoveTriangleCommand;
+
 
 public class DrawingTUI {
 	Scanner in;
@@ -12,14 +22,15 @@ public class DrawingTUI {
 	public DrawingTUI(Scanner i)
 	{
 		this.in=i;
-		tab=new String[7];
-		tab[0]="[A-Z|a-z]+[1-9]*=Circle\\(\\(\\d+,\\d+\\),\\d+\\)";
-		tab[1]="moveCircle\\([a-z|A-Z]+[1-9]*,\\(\\d+,\\d+\\)\\)";
+		tab=new String[8];
+		tab[0]="[A-Z|a-z]+[0-9]*=Circle\\(\\(\\d+,\\d+\\),\\d+\\)";
+		tab[1]="moveCircle\\([a-z|A-Z]+[0-9]*,\\(\\d+,\\d+\\)\\)";
 		tab[2]="dessin\\d+\\(([a-z|A-Z]+[0-9]+\\,)+[a-z|A-Z]+[0-9]+;(Circle,|Triangle,|Square,)+(Circle\\)|Triangle\\)|Square\\))";
 		tab[3]="[a-z|A-Z]+\\d+=Triangle\\(\\d+,\\d+;\\d+,\\d+;\\d+,\\d+\\)";
-		tab[4]="moveTriangle\\([a-z|A-Z]+[1-9]*,\\(\\d+,\\d+\\)\\)";
+		tab[4]="moveTriangle\\([a-z|A-Z]+[0-9]*,\\(\\d+,\\d+\\)\\)";
 		tab[5]="[a-z|A-Z]+\\d+=Square\\(\\d+,\\d+;\\d+,\\d+\\)";
-		tab[6]="moveSquare\\([a-z|A-Z]+[1-9]*,\\(\\d+,\\d+\\)\\)";
+		tab[6]="moveSquare\\([a-z|A-Z]+[0-9]*,\\(\\d+,\\d+\\)\\)";
+		tab[7]="moveComposite\\([a-z|A-Z]+[0-9]*,\\(\\d+,\\d+\\)\\)";
 		
 	}
 	
@@ -105,11 +116,21 @@ public class DrawingTUI {
 		}
 		else if (situation==7)
 		{
+			System.out.println("moov du carre");
 			String[] elements=new String[parsingMove(f).length];
 			elements=parsingMove(f);
 			Command cd=new MoveSquareCommand(elements[1],constructPoint(elements[3],elements[4]));
 			return cd;
-		}	
+		}
+		else if (situation==8)
+		{
+			//System.out.println("moov composite");
+			String[] elements=new String[parsingMove(f).length];
+			elements=parsingMove(f);
+			Command cd=new MoveCompositeCommand(elements[1],constructPoint(elements[3],elements[4]));
+			return cd;
+			
+		}
 		return cf;
 		}
 	

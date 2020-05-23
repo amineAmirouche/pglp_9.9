@@ -24,7 +24,12 @@ private String url;
 			statement.setString(2, s.GetCoordcentre());
 			statement.setInt(3, s.getRayon());
 			
-			statement.execute();}
+			statement.execute();
+			statement.close();
+			
+			}
+			
+			conn.close();
 			return;
 			
 		} catch (SQLException e) {
@@ -43,6 +48,8 @@ private String url;
 			statement.setInt(2, s.getRayon());
 			statement.setString(3, s.getId());
 			statement.execute();
+			statement.close();
+			conn.close();
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
@@ -64,6 +71,9 @@ private String url;
                System.out.println("rayon: "+resultSet.getInt("rayon"));
                
            }
+           resultSet.close();
+           statement.close();
+			conn.close();
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -80,15 +90,39 @@ private String url;
 	          
 			if(resultSet.next() && resultSet.getString("id")!=null )
 			{
+				resultSet.close();
+				statement.close();
+				conn.close();
 				System.out.println("Insertion echoué dans la table Circle "+s.getId() + "existe deja dans la bd");
 				return true;
 			}
-			else return false;
+			else 
+				{
+				resultSet.close();
+				statement.close();
+				conn.close();
+				return false;}
 	        
 		} catch (SQLException e) {
 			//return false;
 			e.printStackTrace();
 			return false;
+		}
+		
+	}
+	
+	public void RenitialiseTable() 
+	{
+		try {
+			Connection conn=DriverManager.getConnection(this.url);
+			java.sql.PreparedStatement statement=conn.prepareStatement("delete from CIRCLE");
+			statement.execute();
+			statement.close();
+			conn.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 	}
@@ -102,18 +136,17 @@ private String url;
 		try {
 			Connection conn=DriverManager.getConnection(this.url);
 			java.sql.Statement statement =conn.createStatement();
-			System.out.println("jai cree la connexion");
 			java.sql.ResultSet resultSet = statement.executeQuery("select * from CIRCLE where id='"+id+"'");
-			System.out.println("jai executer la requete");
 			
 			while (resultSet.next())
 			{
-			System.out.println(" id :"+ resultSet.getString("id"));
 			circle.SetId(resultSet.getString("id"));
 			String[] arrOfStr=splitt(resultSet.getString("centre"));
-			System.out.println("result du splitt "+ arrOfStr[0]+ " l'autre "+ arrOfStr[1]);
 			circle.SetCentre(Float.parseFloat(arrOfStr[0]), Float.parseFloat(arrOfStr[1]));
 			circle.SetRayon(resultSet.getInt("rayon"));}
+			resultSet.close();
+			statement.close();
+			conn.close();
 			return circle; 
 			
 		} catch (SQLException e) {
@@ -131,6 +164,61 @@ private String url;
 		
 	}
 	
+	public void AfficheThisCircle(Circle s)
+	{
+		
+		try {
+			Connection conn=DriverManager.getConnection(this.url);
+			java.sql.Statement statement =conn.createStatement();
+           java.sql.ResultSet resultSet = statement.executeQuery("select * from CIRCLE where id='"+s.getId()+"'");
+
+           while (resultSet.next()){
+        	   System.out.println("affichage du tuple depuis la BD Square");
+               System.out.println("id: "+resultSet.getString("id"));
+               System.out.println("centre: "+resultSet.getString("centre"));
+               System.out.println("rayon: "+resultSet.getInt("rayon"));
+               
+           }
+           resultSet.close();
+           statement.close();
+           conn.close();
+           //conn=DriverManager.getConnection("jdbc:derby:;shutdown=true");
+           //conn=DriverManager.getConnection("jdbc:derby:Bdpglp;shutdown=true");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void AfficheThisCircle1(String s)
+	{
+		
+		try {
+			Connection conn=DriverManager.getConnection(this.url);
+			java.sql.Statement statement =conn.createStatement();
+           java.sql.ResultSet resultSet = statement.executeQuery("select * from CIRCLE where id='"+s+"'");
+
+           while (resultSet.next()){
+        	   System.out.println("affichage du tuple depuis la BD Circle");
+               System.out.println("id: "+resultSet.getString("id"));
+               System.out.println("centre: "+resultSet.getString("centre"));
+               System.out.println("rayon: "+resultSet.getInt("rayon"));
+               
+           }
+           resultSet.close();
+           statement.close();
+           conn.close();
+           //conn=DriverManager.getConnection("jdbc:derby:;shutdown=true");
+           //conn=DriverManager.getConnection("jdbc:derby:Bdpglp;shutdown=true");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	 
+	
+	
+	
 	
 	public boolean existTuple1(String s)
 	{
@@ -141,10 +229,17 @@ private String url;
 	          
 			if(resultSet.next() && resultSet.getString("id")!=null )
 			{
+				resultSet.close();
+				statement.close();
+				conn.close();
 				//System.out.println("Insertion echoué dans la table Circle "+s+ "existe deja dans la bd");
 				return true;
 			}
-			else return false;
+			else {
+				resultSet.close();
+				statement.close();
+				conn.close();
+				return false;}
 	        
 		} catch (SQLException e) {
 			//return false;
