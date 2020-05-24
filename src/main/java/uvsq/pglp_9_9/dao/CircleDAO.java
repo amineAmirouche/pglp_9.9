@@ -7,15 +7,27 @@ import java.sql.SQLException;
 import uvsq.pglp_9_9.Circle;
 import uvsq.pglp_9_9.Point;
 
+/**
+ * @author amine
+ *
+ */
 public class CircleDAO {
 	
 private String url;
 	
+	/**
+	 * @param url:lien de connexion a la base de données
+	 * constructeur de CircleDAO
+	 */
 	public CircleDAO(String url)
 	{
 		this.url=url;
 	}
 	
+	/**
+	 * @param s:cercle a sauvegardé dans la bd
+	 * méthode qui permet de sauvegarder un cercle dans la table CIRCLE
+	 */
 	public void saveCircle(Circle s)
 	{
 		try {
@@ -42,6 +54,10 @@ private String url;
 		
 	}
 	
+	/**
+	 * @param s:cercle à mettre a jour
+	 * methode qui permet de mettre a jour les coordonnées d'un cercle deja existant dans la bd
+	 */
 	public void updateCircle(Circle s)
 	{
 		try {
@@ -60,6 +76,9 @@ private String url;
 	}
 	
 	
+	/**
+	 * méthode qui permet d'afficher tout les cercles de la table CIRCLE
+	 */
 	public void AfficheCercles()
 	{
 		
@@ -84,6 +103,11 @@ private String url;
 		}
 	}
 	
+	/**
+	 * @param s:l'objet cercle a verifier
+	 * Méthode qui permet de verifier l'existence d'un cercle dans la bd
+	 * @return
+	 */
 	public boolean existTuple(Circle s)
 	{
 		try {
@@ -114,6 +138,9 @@ private String url;
 		
 	}
 	
+	/**
+	 * méthode qui permet de renitialiser la table CIRCLE
+	 */
 	public void RenitialiseTable() 
 	{
 		try {
@@ -130,6 +157,11 @@ private String url;
 		
 	}
 	
+	/**
+	 * @param id:identifiant du cercle dans la bd
+	 * methode qui read le cercle dont l'indentifiant est id , récupere ses coordonnées dans un objet circle et le return
+	 * @return
+	 */
 	public Circle getObjet(String id)
 	{
 		//System.out.println("l id du debut est"+ id);
@@ -167,6 +199,10 @@ private String url;
 		
 	}
 	
+	/**
+	 * @param s:Cercle a afficher
+	 * methode qui permet d'afficher un cercle précis
+	 */
 	public void AfficheThisCircle(Circle s)
 	{
 		

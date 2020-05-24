@@ -89,6 +89,7 @@ public class DrawingApp {
 			statement.executeQuery("CREATE TABLE TRIANGLE(id VARCHAR(30),point1 VARCHAR(30),point2 VARCHAR(30),point3 VARCHAR(30))");
 			statement.executeQuery("CREATE TABLE CIRCLE(id VARCHAR(30),centre VARCHAR(30),rayon int");
 			statement.executeQuery("CREATE TABLE COMPOSITE(type VARCHAR(30),reference VARCHAR(30),id VARCHAR(30))");
+			statement.close();
 			conn.close();
 			
 		} catch (SQLException e) {
