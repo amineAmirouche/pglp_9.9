@@ -1,5 +1,9 @@
 package uvsq.pglp_9_9;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Scanner;
 
 import uvsq.pglp_9_9.command.Command;
@@ -62,8 +66,41 @@ public class DrawingApp {
 	    	cf.execute();}
 			
 		}
+	
+	public static void CreateDataBase()
+	{
+		String url="jdbc:derby:Bdpglp;create=true";
+		try {
+			Connection conn=DriverManager.getConnection(url);
+			conn.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public static void CreateTables()
+	{
+		String url="jdbc:derby:Bdpglp";
+		try {
+			Connection conn=DriverManager.getConnection(url);
+			Statement statement = conn.createStatement(); 
+			statement.executeQuery("CREATE TABLE SQUARE(id VARCHAR(30),point1 VARCHAR(30),point2 VARCHAR(30))");
+			statement.executeQuery("CREATE TABLE TRIANGLE(id VARCHAR(30),point1 VARCHAR(30),point2 VARCHAR(30),point3 VARCHAR(30))");
+			statement.executeQuery("CREATE TABLE CIRCLE(id VARCHAR(30),centre VARCHAR(30),rayon int");
+			statement.executeQuery("CREATE TABLE COMPOSITE(type VARCHAR(30),reference VARCHAR(30),id VARCHAR(30))");
+			conn.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 
 	public static void main(String[] args) throws Exception {
+		CreateDataBase();
+		CreateTables();
 		Manuel();
 		run();
 
