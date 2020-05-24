@@ -1,8 +1,8 @@
 package uvsq.pglp_9_9.command;
 
 import uvsq.pglp_9_9.Circle;
-import uvsq.pglp_9_9.CircleDAO;
 import uvsq.pglp_9_9.Point;
+import uvsq.pglp_9_9.dao.CircleDAO;
 
 public class CreateCircleCommand implements Command{
 
@@ -31,9 +31,9 @@ public class CreateCircleCommand implements Command{
 		String url="jdbc:derby:Bdpglp";
 		Circle c1=new Circle(id,centre,rayon);
 		CircleDAO circle=new CircleDAO(url);
-		circle.AfficheCercles();
 		circle.saveCircle(c1);
 		System.out.println("le cercle a bien ete sauvegardé");
+		circle.AfficheThisCircle(c1);
 		
 	}
 

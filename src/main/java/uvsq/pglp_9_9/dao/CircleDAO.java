@@ -1,8 +1,11 @@
-package uvsq.pglp_9_9;
+package uvsq.pglp_9_9.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+
+import uvsq.pglp_9_9.Circle;
+import uvsq.pglp_9_9.Point;
 
 public class CircleDAO {
 	
@@ -93,7 +96,7 @@ private String url;
 				resultSet.close();
 				statement.close();
 				conn.close();
-				System.out.println("Insertion echoué dans la table Circle "+s.getId() + "existe deja dans la bd");
+				//System.out.println("Insertion echoué dans la table Circle "+s.getId() + "existe deja dans la bd");
 				return true;
 			}
 			else 
@@ -129,7 +132,7 @@ private String url;
 	
 	public Circle getObjet(String id)
 	{
-		System.out.println("l id du debut est"+ id);
+		//System.out.println("l id du debut est"+ id);
 		Point g=new Point(0,0);
 		Circle circle =new Circle("c0",g,0);
 		

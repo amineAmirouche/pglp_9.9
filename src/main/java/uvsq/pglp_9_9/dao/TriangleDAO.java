@@ -1,8 +1,11 @@
-package uvsq.pglp_9_9;
+package uvsq.pglp_9_9.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+
+import uvsq.pglp_9_9.Point;
+import uvsq.pglp_9_9.Triangle;
 
 public class TriangleDAO {
 private String url;

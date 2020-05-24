@@ -1,9 +1,16 @@
-package uvsq.pglp_9_9;
+package uvsq.pglp_9_9.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import uvsq.pglp_9_9.Circle;
+import uvsq.pglp_9_9.CompositeShape;
+import uvsq.pglp_9_9.Shape;
+import uvsq.pglp_9_9.Square;
+import uvsq.pglp_9_9.Triangle;
+import uvsq.pglp_9_9.TupleExistException;
 
 public class CompositeShapeDAO {
 	String url;
@@ -109,10 +116,12 @@ public class CompositeShapeDAO {
 				statement.execute();
 				statement.close();
 				}
-				conn.close();
+				
 				continue;
 				
 			}
+			
+			conn.close();
  			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

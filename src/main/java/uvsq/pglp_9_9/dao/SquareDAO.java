@@ -1,4 +1,4 @@
-package uvsq.pglp_9_9;
+package uvsq.pglp_9_9.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,6 +6,10 @@ import java.sql.SQLException;
 
 import org.apache.derby.iapi.sql.PreparedStatement;
 import org.apache.derby.iapi.sql.ResultSet;
+
+import uvsq.pglp_9_9.Point;
+import uvsq.pglp_9_9.Square;
+import uvsq.pglp_9_9.TupleExistException;
 
 public class SquareDAO {
 	

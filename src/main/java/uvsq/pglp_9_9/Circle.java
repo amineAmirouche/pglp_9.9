@@ -10,19 +10,13 @@ public class Circle implements Shape {
 		this.id=id;
 		this.centre=centre;
 		this.rayon=r;
-		/*this.centre.x=centre.x;
-		this.centre.y=centre.y;
-		this.rayon=r;*/
-	}
+		}
 
 	public void move(Point decalage)
 	{
 		this.centre.SetX(this.centre.getX()+decalage.getX());
 		this.centre.SetY(this.centre.getY()+decalage.getY());
 		
-	/*	this.centre.x+=decalage.x;
-		this.centre.y+=decalage.y;*/
-		System.out.println("cercle  :" + this.GetCoordcentre());
 	}
 	
 	public void draw()

@@ -38,7 +38,7 @@ public class DrawingTUI {
 	public Command NextCommand() throws Exception
 	{
 		Command cf=null;
-		  System.out.print("Enter your name: ");  
+		  System.out.print("Entrez votre commande: ");  
 		String f=in.nextLine();
 		if (f.equals("exit"))
 		{
@@ -54,7 +54,6 @@ public class DrawingTUI {
 			System.out.println("creation cercle");
 			String[] elements=new String[parsingCircle(f).length];
 			elements=parsingCircle(f);
-			AfficheElements(elements);
 			Command cd= new CreateCircleCommand(elements[0],constructPoint(elements[3],elements[4]),Integer.parseInt(elements[6]));
 			return cd;
 			
@@ -65,18 +64,13 @@ public class DrawingTUI {
 			System.out.println("move du cercle");
 			String[] elements=new String[parsingMove(f).length];
 			elements=parsingMove(f);
-			AfficheElements(elements);
 			Command cd=new MoveCircleCommand(elements[1],constructPoint(elements[3],elements[4]));
 			return cd;
 			
 		}
 		else if (situation==3)
 		{
-			System.out.println("le composite");
-			//AfficheElements(SplitFirstCompositeElem(f));
-			//SplitFirstCompositeElem(f);
-			System.out.println("le second element");
-			//AfficheElements(SplitSecondCompositeElem(f));
+			
 			Command cd=new CreateCompositeCommand(IdCompositeElem(f),SplitSecondCompositeElem(f),SplitFirstCompositeElem(f));
 			return cd;
 		}
@@ -84,7 +78,7 @@ public class DrawingTUI {
 		else if (situation==4)
 		{
 			//throw new ErrorSyntaxeException("erreur de Syntaxe");
-			System.out.print("je suis le triangle");
+			//System.out.print("je suis le triangle");
 			//AfficheElements(parsingTriangle(f));
 			String[] myElems=parsingTriangleSquare(f);
 			Point p1=ConstructPoint1(myElems[0]);
@@ -96,7 +90,7 @@ public class DrawingTUI {
 		
 		else if (situation==5)
 		{
-			System.out.println("move du Triangle..");
+			//System.out.println("move du Triangle..");
 			String[] elements=new String[parsingMove(f).length];
 			elements=parsingMove(f);
 			Command cd=new MoveTriangleCommand(elements[1],constructPoint(elements[3],elements[4]));
@@ -106,7 +100,7 @@ public class DrawingTUI {
 		
 		else if (situation==6)
 		{
-			System.out.println("je suis le carré");
+			//System.out.println("je suis le carré");
 			String[] myElems=parsingTriangleSquare(f);
 			Point p1=ConstructPoint1(myElems[0]);
 			Point p2=ConstructPoint1(myElems[1]);
@@ -116,7 +110,7 @@ public class DrawingTUI {
 		}
 		else if (situation==7)
 		{
-			System.out.println("moov du carre");
+			//System.out.println("moov du carre");
 			String[] elements=new String[parsingMove(f).length];
 			elements=parsingMove(f);
 			Command cd=new MoveSquareCommand(elements[1],constructPoint(elements[3],elements[4]));
@@ -130,6 +124,10 @@ public class DrawingTUI {
 			Command cd=new MoveCompositeCommand(elements[1],constructPoint(elements[3],elements[4]));
 			return cd;
 			
+		}
+		else if (situation==9)
+		{
+			throw new ErrorSyntaxeException("Verifiez bien votre syntaxe");
 		}
 		return cf;
 		}

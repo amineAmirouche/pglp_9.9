@@ -82,7 +82,7 @@
 				<configuration>
 					<archive>
 					<manifest>
-					<mainClass>uvsq.pglp_9_9.App</mainClass>
+					<mainClass>uvsq.pglp_9_9.DrawingApp</mainClass>
 					</manifest>
 					</archive>
 				</configuration>
@@ -99,7 +99,7 @@
 					</descriptorRefs>
 					<archive>
 					<manifest>
-					<mainClass>uvsq.pglp_9_9.App</mainClass>
+					<mainClass>uvsq.pglp_9_9.DrawingApp</mainClass>
 					</manifest>
 					</archive>
 				</configuration>
